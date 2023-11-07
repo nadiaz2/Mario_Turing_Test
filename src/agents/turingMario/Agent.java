@@ -5,23 +5,43 @@ import engine.core.MarioForwardModel;
 import engine.core.MarioTimer;
 import engine.helper.MarioActions;
 
+import java.util.Arrays;
+
 public class Agent implements MarioAgent {
+	private DecisionTreeNode verticalDecisionTree;
+	private DecisionTreeNode horizontalDecisionTree;
+
 	@Override
 	public void initialize(MarioForwardModel model, MarioTimer timer) {
+		verticalDecisionTree = new ObstacleNear(new DecisionTreeNode[] {
+				new Jump(),
+				new EnemyNear(new DecisionTreeNode[] {
+						new Jump(), new Idle()
+				})
+		});
 
+		horizontalDecisionTree = new MakingProgress(
+				new DecisionTreeNode[] {
+						new Left(), new Right()
+				}
+		);
 	}
 
 	@Override
 	public boolean[] getActions(MarioForwardModel model, MarioTimer timer) {
-		//boolean[] actionArray = new boolean[MarioActions.numberOfActions()];
 
-		DecisionTreeNode decisionTree = new EnemyNear(new DecisionTreeNode[] {
-			new Jump(), new Idle()
-		});
-		Action action = (Action) decisionTree.makeDecision(model);
+		Action verticalAction = (Action) verticalDecisionTree.makeDecision(model);
+		boolean[] verticalActionArray = verticalAction.getButtonArray(model);
 
-		boolean[] actionArray = action.getButtonArray();
-		actionArray[MarioActions.RIGHT.getValue()] = true;
+		Action horizontalAction = (Action) horizontalDecisionTree.makeDecision(model);
+		boolean[] horizontalActionArray = horizontalAction.getButtonArray(model);
+
+		boolean[] actionArray = new boolean[MarioActions.numberOfActions()];
+		for(int i = 0; i < actionArray.length; i++) {
+			actionArray[i] = verticalActionArray[i] || horizontalActionArray[i];
+		}
+
+		System.out.println(Arrays.toString(actionArray));
 
 		return actionArray;
 	}
