@@ -1,10 +1,11 @@
-package agents.turingMario;
+package agents.turingMario.Decisions;
 
+import agents.turingMario.DecisionTreeNode;
 import engine.core.MarioForwardModel;
 
 public class ObstacleNear extends Decision {
 
-	protected ObstacleNear(DecisionTreeNode[] childNodes) {
+	public ObstacleNear(DecisionTreeNode[] childNodes) {
 		super(childNodes);
 	}
 

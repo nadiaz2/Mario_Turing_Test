@@ -1,5 +1,6 @@
-package agents.turingMario;
+package agents.turingMario.Decisions;
 
+import agents.turingMario.DecisionTreeNode;
 import engine.core.MarioForwardModel;
 
 public abstract class Decision implements DecisionTreeNode {

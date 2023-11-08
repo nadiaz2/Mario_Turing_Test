@@ -1,4 +1,4 @@
-package agents.turingMario;
+package agents.turingMario.Actions;
 
 import engine.core.MarioForwardModel;
 import engine.helper.MarioActions;

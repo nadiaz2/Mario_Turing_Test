@@ -1,5 +1,7 @@
 package agents.turingMario;
 
+import agents.turingMario.Actions.*;
+import agents.turingMario.Decisions.*;
 import engine.core.MarioAgent;
 import engine.core.MarioForwardModel;
 import engine.core.MarioTimer;

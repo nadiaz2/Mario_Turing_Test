@@ -1,12 +1,13 @@
-package agents.turingMario;
+package agents.turingMario.Decisions;
 
+import agents.turingMario.DecisionTreeNode;
 import engine.core.MarioForwardModel;
 
 public class MakingProgress extends Decision {
 
 	int leftTicks;
 
-	protected MakingProgress(DecisionTreeNode[] childNodes) {
+	public MakingProgress(DecisionTreeNode[] childNodes) {
 		super(childNodes);
 		leftTicks = 0;
 	}

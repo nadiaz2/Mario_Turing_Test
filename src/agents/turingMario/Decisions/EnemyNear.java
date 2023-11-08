@@ -1,10 +1,11 @@
-package agents.turingMario;
+package agents.turingMario.Decisions;
 
+import agents.turingMario.DecisionTreeNode;
 import engine.core.MarioForwardModel;
 
 public class EnemyNear extends Decision {
 
-	protected EnemyNear(DecisionTreeNode[] childNodes) {
+	public EnemyNear(DecisionTreeNode[] childNodes) {
 		super(childNodes);
 	}
 
