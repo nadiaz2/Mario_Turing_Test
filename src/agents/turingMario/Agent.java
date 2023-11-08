@@ -22,7 +22,7 @@ public class Agent implements MarioAgent {
 				})
 		});
 
-		horizontalDecisionTree = new MakingProgress(
+		horizontalDecisionTree = new ObstacleTooClose(
 				new DecisionTreeNode[] {
 						new Left(), new Right()
 				}
@@ -43,7 +43,8 @@ public class Agent implements MarioAgent {
 			actionArray[i] = verticalActionArray[i] || horizontalActionArray[i];
 		}
 
-		System.out.println(Arrays.toString(actionArray));
+		//System.out.println(Arrays.toString(actionArray));
+		System.out.println(Arrays.toString(model.getMarioFloatVelocity()));
 
 		return actionArray;
 	}

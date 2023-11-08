@@ -3,11 +3,11 @@ package agents.turingMario.Decisions;
 import agents.turingMario.DecisionTreeNode;
 import engine.core.MarioForwardModel;
 
-public class MakingProgress extends Decision {
+public class ObstacleTooClose extends Decision {
 
 	int leftTicks;
 
-	public MakingProgress(DecisionTreeNode[] childNodes) {
+	public ObstacleTooClose(DecisionTreeNode[] childNodes) {
 		super(childNodes);
 		leftTicks = 0;
 	}
