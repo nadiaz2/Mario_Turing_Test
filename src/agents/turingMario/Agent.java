@@ -17,8 +17,11 @@ public class Agent implements MarioAgent {
 	public void initialize(MarioForwardModel model, MarioTimer timer) {
 		verticalDecisionTree = new ObstacleNear(new DecisionTreeNode[] {
 				new Jump(),
-				new EnemyNear(new DecisionTreeNode[] {
-						new Jump(), new Idle()
+				new PitNear(new DecisionTreeNode[] {
+						new Jump(),
+						new EnemyNear(new DecisionTreeNode[] {
+								new Jump(), new Idle()
+						})
 				})
 		});
 
@@ -44,7 +47,8 @@ public class Agent implements MarioAgent {
 		}
 
 		//System.out.println(Arrays.toString(actionArray));
-		System.out.println(Arrays.toString(model.getMarioFloatVelocity()));
+		//System.out.println(Arrays.toString(model.getMarioFloatVelocity()));
+		System.out.println(model.getRemainingTime());
 
 		return actionArray;
 	}
