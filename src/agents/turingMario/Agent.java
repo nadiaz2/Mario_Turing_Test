@@ -25,20 +25,27 @@ public class Agent implements MarioAgent {
 				})
 		});
 
-		horizontalDecisionTree = new ObstacleTooClose(
-				new DecisionTreeNode[] {
+		horizontalDecisionTree = new WillFallIntoEnemy(new DecisionTreeNode[] {
+				new Idle(),
+				new ObstacleTooClose(new DecisionTreeNode[]{
 						new Left(), new Right()
-				}
-		);
+				})
+		});
 	}
 
 	@Override
 	public boolean[] getActions(MarioForwardModel model, MarioTimer timer) {
 
-		Action verticalAction = (Action) verticalDecisionTree.makeDecision(model);
-		boolean[] verticalActionArray = verticalAction.getButtonArray(model);
+		Action verticalAction;
+		Action horizontalAction;
+		try {
+			verticalAction = (Action) verticalDecisionTree.makeDecision(model);
+			horizontalAction = (Action) horizontalDecisionTree.makeDecision(model);
+		} catch(Exception e) {
+			return new boolean[MarioActions.numberOfActions()];
+		}
 
-		Action horizontalAction = (Action) horizontalDecisionTree.makeDecision(model);
+		boolean[] verticalActionArray = verticalAction.getButtonArray(model);
 		boolean[] horizontalActionArray = horizontalAction.getButtonArray(model);
 
 		boolean[] actionArray = new boolean[MarioActions.numberOfActions()];
@@ -48,7 +55,8 @@ public class Agent implements MarioAgent {
 
 		//System.out.println(Arrays.toString(actionArray));
 		//System.out.println(Arrays.toString(model.getMarioFloatVelocity()));
-		System.out.println(model.getRemainingTime());
+		//System.out.println(model.getRemainingTime());
+		System.out.println(model.getMarioScreenTilePos()[0] + " " + model.getMarioFloatPos()[0]);
 
 		return actionArray;
 	}
