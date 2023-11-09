@@ -19,7 +19,7 @@ public class WillFallIntoEnemy extends Decision {
 		boolean willCollide = false;
 		if(!model.getMarioCanJumpHigher()) {
 			int enemyExists;
-			enemyExists =  enemies[x+1][y+1] + enemies[x+1][y+2] + enemies[x+2][y+2];
+			enemyExists =  enemies[x+1][y+1] + enemies[x+1][y+2] + enemies[x+2][y+2] + enemies[x+3][y+2] + enemies[x+4][y+2];
 			willCollide = enemyExists > 0;
 		}
 
