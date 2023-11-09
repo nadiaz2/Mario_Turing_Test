@@ -18,11 +18,8 @@ public class Agent implements MarioAgent {
 				}),
 				new PitNear(new DecisionTreeNode[]{
 						new RightJump(),
-						new EnemyNear(new DecisionTreeNode[] {
-								new RightJump(),
-								new WillFallIntoEnemy(new DecisionTreeNode[]{
-										new Left(), new Right()
-								})
+						new WillFallIntoEnemy(new DecisionTreeNode[]{
+								new Left(), new Right()
 						})
 				})
 		});

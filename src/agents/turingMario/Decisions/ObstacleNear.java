@@ -11,7 +11,7 @@ public class ObstacleNear extends Decision {
 
 	@Override
 	protected DecisionTreeNode getBranch(MarioForwardModel model) {
-		int[][] obstacles = model.getScreenSceneObservation(2);
+		int[][] obstacles = model.getScreenCompleteObservation(2, 2);
 		int[] marioPos = model.getMarioScreenTilePos();
 		int x = marioPos[0];
 		int y = marioPos[1];
