@@ -60,8 +60,11 @@ public class ObstacleTooClose extends Decision {
 
 		leftTicks = Math.max(0, --leftTicks);
 
+		boolean blockedOnLeft = obstacles[x - 1][y] != 0;
+
 		lastActiveTick = model.getRemainingTime();
-		lastDecision = decision ? childNodes[0] : childNodes[1];
+		lastDecision = decision && !blockedOnLeft ? childNodes[0] : childNodes[1];
+		//System.out.println(model.getMarioFloatPos()[0] % 1 );
 
 		return lastDecision;
 	}

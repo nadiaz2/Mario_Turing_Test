@@ -35,7 +35,7 @@ public class Agent implements MarioAgent {
 		try {
 			action = (Action) newTree.makeDecision(model);
 		} catch(Exception e) {
-			System.out.println("Error");
+			System.err.println("The decision tree resulted in an exception: holding RIGHT");
 			boolean[] errorControls = new boolean[MarioActions.numberOfActions()];
 			errorControls[MarioActions.RIGHT.getValue()] = true;
 			return errorControls;
