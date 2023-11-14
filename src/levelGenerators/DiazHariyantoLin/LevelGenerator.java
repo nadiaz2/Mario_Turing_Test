@@ -4,15 +4,96 @@ import engine.core.MarioLevelGenerator;
 import engine.core.MarioLevelModel;
 import engine.core.MarioTimer;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+
 public class LevelGenerator implements MarioLevelGenerator {
+
+	private final String PATH = "./src/levelGenerators/DiazHariyantoLin/";
+	private Map<String, List<String>> transitionTable;
+	private int xOffset;
 
 	@Override
 	public String getGeneratedLevel(MarioLevelModel model, MarioTimer timer) {
-		return null;
+		loadTransitions();
+		xOffset = 0;
+		model.clearMap();
+
+		String currentState = "begin";
+		while(!currentState.equals("end")) {
+			List<String> possibilities = transitionTable.get(currentState);
+			int index = (int) (Math.random() * possibilities.size());
+			currentState = possibilities.get(index);
+			addState(currentState, model);
+		}
+
+		return model.getMap();
 	}
-	
+
 	@Override
 	public String getGeneratorName() {
 		return "DiazHariyantoLinLevelGenerator";
+	}
+
+	private void loadTransitions() {
+		transitionTable = new HashMap<>();
+
+		Scanner sc;
+		try {
+			File file = new File(PATH+"transitionWeights.txt");
+			sc = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			System.err.println("transitionWeights.txt file not found");
+			return;
+		}
+
+		while(sc.hasNextLine()) {
+			String line = sc.nextLine();
+
+			String[] dictionaryParts = line.split(" : ", 2);
+			String key = dictionaryParts[0];
+
+			List<String> transitionList = new ArrayList<>();
+
+			for (String transitionWeight : dictionaryParts[1].split(" ; ")) {
+				String[] transitionPair = transitionWeight.split(",");
+				int weight = Integer.parseInt(transitionPair[1]);
+
+				for(int i = 0; i < weight; i++) {
+					transitionList.add(transitionPair[0]);
+				}
+			}
+
+			transitionTable.put(key, transitionList);
+		}
+	}
+
+	private void addState(String currentState, MarioLevelModel model) {
+		if(currentState.equals("end")) {
+			return;
+		}
+
+		Scanner sc;
+		try {
+			File file = new File(PATH+"levelChunks/"+currentState+".txt");
+			sc = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			System.err.println(currentState+".txt file not found");
+			return;
+		}
+
+		int y = 0;
+		int lineLength = 0;
+		while(sc.hasNextLine()) {
+			String line = sc.nextLine();
+			lineLength = Math.max(lineLength, line.length());
+			for(int x = 0; x < line.length(); x++) {
+				model.setBlock(x + xOffset, y, line.charAt(x));
+			}
+			y++;
+		}
+
+		xOffset += lineLength;
 	}
 }

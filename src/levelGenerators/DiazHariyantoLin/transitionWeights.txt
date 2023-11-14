@@ -1,0 +1,4 @@
+begin : marioStart,1
+marioStart : pyramid,1
+pyramid : basicFlag,1 ; pyramid,1
+basicFlag : end,1
