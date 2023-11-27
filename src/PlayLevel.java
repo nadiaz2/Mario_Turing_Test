@@ -27,13 +27,14 @@ public class PlayLevel {
         try {
             content = new String(Files.readAllBytes(Paths.get(filepath)));
         } catch (IOException e) {
+            System.err.println("Failed to get file path.");
         }
         return content;
     }
 
     public static void main(String[] args) {
         MarioGame game = new MarioGame();
-        // printResults(game.playGame(getLevel("./levels/original/lvl-3.txt"), 200, 0));
-        printResults(game.runGame(new agents.turingMario.Agent(), getLevel("./levels/original/lvl-1.txt"), 20, 0, true));
+        //printResults(game.playGame(getLevel("./levels/original/lvl-1.txt"), 200, 0));
+        printResults(game.runGame(new agents.turingMario.Agent(), getLevel("./levels/original/lvl-1.txt"), 200, 0, true));
     }
 }
