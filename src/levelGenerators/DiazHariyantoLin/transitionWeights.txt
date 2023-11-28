@@ -1,4 +1,11 @@
 begin : marioStart,1
-marioStart : pyramid,1
-pyramid : basicFlag,1 ; pyramid,1
+
+marioStart : empty,1 ; (1-1)Start,3
+pyramid : empty,1 ; bullets,1
+empty : empty,1 ; gap,2 ; pyramid,3
+bullets : bullets,1 ; empty,5 ; stairFlag,1
+(1-1)Start : empty,1
+gap : empty,1 ; basicFlag,1
+
 basicFlag : end,1
+stairFlag : end,1
