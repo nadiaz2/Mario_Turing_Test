@@ -30,7 +30,7 @@ public class LevelGenerator implements MarioLevelGenerator {
 		while(!currentState.equals("end")) {
 			List<String> possibilities = transitionTable.get(currentState);
 			int index = (int) (Math.random() * possibilities.size());
-			currentState = addState(possibilities.get(index), model);
+			currentState = addState(possibilities.get(index), currentState, model);
 		}
 
 		return model.getMap();
@@ -77,7 +77,7 @@ public class LevelGenerator implements MarioLevelGenerator {
 		}
 	}
 
-	private String addState(String currentState, MarioLevelModel model) {
+	private String addState(String currentState, String previousState, MarioLevelModel model) {
 		if(currentState.equals("end")) {
 			return currentState;
 		}
@@ -90,9 +90,9 @@ public class LevelGenerator implements MarioLevelGenerator {
 
 		if(model.getWidth() - (xOffset + lineLength) < 16 ) {
 			//ran out of room to build level; add flag
-			sc = openStateFile(SPECIAL_ENDINGS.getOrDefault(currentState, "basicFlag"));
+			currentState = SPECIAL_ENDINGS.getOrDefault(previousState, "basicFlag");
+			sc = openStateFile(currentState);
 			line = sc.nextLine();
-			currentState = "basicFlag";
 		}
 
 		do {
