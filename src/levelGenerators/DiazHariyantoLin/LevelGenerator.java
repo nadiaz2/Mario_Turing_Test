@@ -24,8 +24,7 @@ public class LevelGenerator implements MarioLevelGenerator {
 		while(!currentState.equals("end")) {
 			List<String> possibilities = transitionTable.get(currentState);
 			int index = (int) (Math.random() * possibilities.size());
-			currentState = possibilities.get(index);
-			addState(currentState, model);
+			currentState = addState(possibilities.get(index), model);
 		}
 
 		return model.getMap();
@@ -50,6 +49,9 @@ public class LevelGenerator implements MarioLevelGenerator {
 
 		while(sc.hasNextLine()) {
 			String line = sc.nextLine();
+			if(line.length() == 0 || line.charAt(0) == '#') {
+				continue;
+			}
 
 			String[] dictionaryParts = line.split(" : ", 2);
 			String key = dictionaryParts[0];
@@ -69,31 +71,46 @@ public class LevelGenerator implements MarioLevelGenerator {
 		}
 	}
 
-	private void addState(String currentState, MarioLevelModel model) {
+	private String addState(String currentState, MarioLevelModel model) {
 		if(currentState.equals("end")) {
-			return;
+			return currentState;
 		}
 
-		Scanner sc;
-		try {
-			File file = new File(PATH+"levelChunks/"+currentState+".txt");
-			sc = new Scanner(file);
-		} catch (FileNotFoundException e) {
-			System.err.println(currentState+".txt file not found");
-			return;
-		}
+		Scanner sc = openStateFile(currentState);
 
 		int y = 0;
-		int lineLength = 0;
-		while(sc.hasNextLine()) {
-			String line = sc.nextLine();
-			lineLength = Math.max(lineLength, line.length());
-			for(int x = 0; x < line.length(); x++) {
+		String line = sc.nextLine();
+		int lineLength = line.length();
+
+		if(model.getWidth() - (xOffset + lineLength) < 16 ) {
+			//ran out of room to build level; add flag
+			sc = openStateFile("basicFlag");
+			line = sc.nextLine();
+			currentState = "basicFlag";
+		}
+
+		do {
+			for (int x = 0; x < line.length(); x++) {
 				model.setBlock(x + xOffset, y, line.charAt(x));
 			}
 			y++;
-		}
+
+			line = sc.hasNextLine() ? sc.nextLine() : null;
+		} while (line != null);
 
 		xOffset += lineLength;
+		return currentState;
+	}
+
+	public Scanner openStateFile(String stateName) {
+		Scanner sc;
+		try {
+			File file = new File(PATH+"levelChunks/"+stateName+".txt");
+			sc = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			System.err.println(stateName+".txt file not found");
+			return null;
+		}
+		return sc;
 	}
 }
