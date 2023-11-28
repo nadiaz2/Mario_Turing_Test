@@ -5,8 +5,8 @@ XXXXXXXXX
 XXXXXXXXX
 XXXXXXXXX
 XXXXXXXXX
-XXXXXXXXX
----------
+XXXX---XX
+-X------X
 ---------
 ---------
 ----*--*-

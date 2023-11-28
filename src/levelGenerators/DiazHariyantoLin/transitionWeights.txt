@@ -1,20 +1,20 @@
 begin : marioStart,1
 
 marioStart : empty,1 ; (1-1)Start,3
-pyramid : empty,1 ; bullets,1
-empty : empty,1 ; gap,2 ; pyramid,3 ; caveEntrance,2 ; elevatedPlatform,2 ; elevatedPlatform1,2 ; overhangHill,3 ; pyramidPipe,3
+pyramid : empty,1 ; bullets,1 ; caveEntrance,1
+empty : empty,1 ; gap,2 ; pyramid,3 ; caveEntrance,4 ; elevatedPlatform,2 ; elevatedPlatform1,2 ; pyramidPipe,3
 elevatedPlatform : empty,1 ; gap,2 ; bullets,1 ; pyramid,2
 elevatedPlatform1 : empty,1 ; gap,2 ; bullets,1 ; pyramid,2
 bullets : bullets,1 ; empty,5 ; stairFlag,1 ; overhangHill,2 ; pyramidPipe,2
 (1-1)Start : empty,1
-gap : empty,2 ; basicFlag,1 ; overhangHill,2
-caveEntrance : caveMiddleEmpty,3 ; caveMiddleEnemy1,1 ; caveMiddleEnemy2,1 ; caveEnd,1
+gap : empty,2 ; basicFlag,1 ; overhangHill,2 ; caveEntrance,2
+caveEntrance : caveMiddleEmpty,2 ; caveMiddleEnemy1,1 ; caveMiddleEnemy2,1 ; caveEnd,1
 caveMiddleEmpty : caveMiddleEmpty,1 ; caveMiddleEnemy1,2 ; caveMiddleEnemy2,2 ; caveEnd,3 ; caveFlag,1
 caveMiddleEnemy1 : caveMiddleEmpty,2 ; caveMiddleEnemy2,1 ; caveEnd,3 ; caveFlag,1
 caveMiddleEnemy2 : caveMiddleEnemy1,1 ; caveMiddleEmpty,2 ; caveEnd,3 ; caveFlag,1
 caveEnd : empty,2 ; stairFlag,1 ; basicFlag,1 ; pyramidPipe,3 ; pyramid,3
 overhangHill : empty,1 ; bullets,1 ; (1-1)Start,1 ; elevatedPlatform1,1 ; basicFlag,1 ; stairFlag,1
-pyramidPipe : empty,2 ; elevatedPlatform,1 ; overhangHill,1 ; gap,2
+pyramidPipe : empty,2 ; elevatedPlatform,1 ; overhangHill,1 ; gap,2 ; caveEntrance,1
 
 basicFlag : end,1
 stairFlag : end,1

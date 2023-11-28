@@ -4,9 +4,9 @@ XXXXXXXXX
 XXXXXXXXX
 XXXXXXXXX
 XXXXXXXXX
-XXXXXXXXX
-XXXXXXXXX
----------
+XX-XXXXXX
+X---XXXX-
+------X--
 ---------
 ---------
 ---------
