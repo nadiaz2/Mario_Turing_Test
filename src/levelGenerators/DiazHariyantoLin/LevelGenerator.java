@@ -102,7 +102,7 @@ public class LevelGenerator implements MarioLevelGenerator {
 		return currentState;
 	}
 
-	public Scanner openStateFile(String stateName) {
+	private Scanner openStateFile(String stateName) {
 		Scanner sc;
 		try {
 			File file = new File(PATH+"levelChunks/"+stateName+".txt");
