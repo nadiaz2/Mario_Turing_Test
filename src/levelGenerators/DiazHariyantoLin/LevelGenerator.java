@@ -11,6 +11,12 @@ import java.util.*;
 public class LevelGenerator implements MarioLevelGenerator {
 
 	private final String PATH = "./src/levelGenerators/DiazHariyantoLin/";
+	private final Map<String, String> SPECIAL_ENDINGS = Map.ofEntries(
+			Map.entry("caveEntrance", "caveFlag"),
+			Map.entry("caveMiddleEmpty", "caveFlag"),
+			Map.entry("caveMiddleEnemy1", "caveFlag"),
+			Map.entry("caveMiddleEnemy2", "caveFlag")
+	);
 	private Map<String, List<String>> transitionTable;
 	private int xOffset;
 
@@ -84,7 +90,7 @@ public class LevelGenerator implements MarioLevelGenerator {
 
 		if(model.getWidth() - (xOffset + lineLength) < 16 ) {
 			//ran out of room to build level; add flag
-			sc = openStateFile("basicFlag");
+			sc = openStateFile(SPECIAL_ENDINGS.getOrDefault(currentState, "basicFlag"));
 			line = sc.nextLine();
 			currentState = "basicFlag";
 		}
